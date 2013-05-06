@@ -116,10 +116,11 @@ public class InteractiveImageViewerExample
 			new InteractiveViewer2D< T >( ( int ) width, ( int ) height, source, initial, converter, DisplayTypes.DISPLAY_SWING )
 			{
 				@Override
-				public void drawScreenImage()
+				public boolean drawScreenImage()
 				{
-					super.drawScreenImage();
+					final boolean valid = super.drawScreenImage();
 					logo.paint( screenImage );
+					return valid;
 				}
 			};
 		}
@@ -145,13 +146,14 @@ public class InteractiveImageViewerExample
 				0,      0, zScale, -interval.dimension( 2 ) * zScale / 2.0 );
 
 //			final InteractiveViewer3D< T > viewer = new InteractiveViewer3D< T >( ( int ) width, ( int ) height, source, interval, initial, converter, DisplayTypes.DISPLAY_IMAGEPLUS )
-			final InteractiveViewer3D< T > viewer = new InteractiveViewer3D< T >( ( int ) width, ( int ) height, source, interval, initial, converter, DisplayTypes.DISPLAY_SWING )
+			new InteractiveViewer3D< T >( ( int ) width, ( int ) height, source, interval, initial, converter, DisplayTypes.DISPLAY_SWING )
 			{
 				@Override
-				public void drawScreenImage()
+				public boolean drawScreenImage()
 				{
-					super.drawScreenImage();
+					final boolean valid = super.drawScreenImage();
 					logo.paint( screenImage );
+					return valid;
 				}
 			};
 		}
@@ -163,7 +165,10 @@ public class InteractiveImageViewerExample
 
 	public static void main( final String[] args ) throws ImgIOException
 	{
-		final String filename = "DrosophilaWing.tif";
+//		final String filename = "DrosophilaWing.tif";
+		final String filename = "/home/saalfeld/hesslab/hesslab-tem-stem/movie-tem-stem/Reslice of 4-2.crisp.tif";
+//		final String filename = "src/main/resources/l1-cns.tif";
+//		final String filename = "src/main/resources/preikestolen.tif";
 //		final String filename = "/home/tobias/workspace/data/DM_MV_110629_TL0_Ch0_Angle0_fragment.tif";
 		final ImgPlus< FloatType > img = new ImgOpener().openImg( filename, new ArrayImgFactory< FloatType >(), new FloatType() );
 //		show( Views.interval( img, FinalInterval.createMinSize( 200, 10, 200, 200 ) ) );

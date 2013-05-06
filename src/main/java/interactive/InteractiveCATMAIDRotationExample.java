@@ -34,10 +34,9 @@
  * policies, either expressed or implied, of any organization.
  * #L%
  */
-
 package interactive;
 
-import interactive.catmaid.CATMAIDRandomAccessibleInterval;
+import interactive.remote.catmaid.CATMAIDRandomAccessibleInterval;
 import net.imglib2.RandomAccessible;
 import net.imglib2.converter.TypeIdentity;
 import net.imglib2.io.ImgIOException;
@@ -67,10 +66,11 @@ public class InteractiveCATMAIDRotationExample
 		new InteractiveViewer3D< ARGBType >( w, h, extended, map, initial, new TypeIdentity< ARGBType >() )
 		{
 			@Override
-			public void drawScreenImage()
+			public boolean drawScreenImage()
 			{
-				super.drawScreenImage();
+				final boolean valid = super.drawScreenImage();
 				logo.paint( screenImage );
+				return valid;
 			}
 		};
 	}

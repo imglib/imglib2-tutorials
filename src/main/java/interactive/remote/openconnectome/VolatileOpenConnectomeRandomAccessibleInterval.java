@@ -16,7 +16,6 @@
  */
 package interactive.remote.openconnectome;
 
-import interactive.remote.VolatileRealType;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -31,6 +30,7 @@ import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 
 import net.imglib2.Interval;
+import net.imglib2.display.VolatileRealType;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
 
 /**
@@ -48,8 +48,25 @@ import net.imglib2.type.numeric.integer.UnsignedByteType;
  * 
  * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
  */
-public class VolatileOpenConnectomeRandomAccessibleInterval extends AbstractOpenConnectomeRandomAccessibleInterval< VolatileRealType< UnsignedByteType > >
+public class VolatileOpenConnectomeRandomAccessibleInterval extends
+		AbstractOpenConnectomeRandomAccessibleInterval< VolatileRealType< UnsignedByteType >, VolatileOpenConnectomeRandomAccessibleInterval.Entry >
 {
+	public class Entry extends AbstractOpenConnectomeRandomAccessibleInterval< VolatileRealType< UnsignedByteType >, Entry >.Entry
+	{
+		public boolean valid;
+		final public byte[] data;
+		
+		public Entry( final Key key, final byte[] data, final boolean valid )
+		{
+			super( key );
+			this.data = data;
+			this.valid = valid;
+		}
+		
+		public boolean isValid() { return valid; }
+		public void setValid( final boolean valid ) { this.valid = valid; }
+	}
+	
 	protected class Fetcher extends Thread
 	{
 		@Override
@@ -95,7 +112,8 @@ public class VolatileOpenConnectomeRandomAccessibleInterval extends AbstractOpen
 						final long z0 = cellDepth * entry.key.z + minZ;
 						
 						final StringBuffer url = new StringBuffer( baseUrl );
-						url.append( "0/" );
+						url.append( level );
+						url.append( "/" );
 						url.append( x0 );
 						url.append( "," );
 						url.append( x0 + cellWidth );
@@ -123,6 +141,7 @@ public class VolatileOpenConnectomeRandomAccessibleInterval extends AbstractOpen
 							final Inflater inflater = new Inflater();
 							inflater.setInput( zippedBytes );
 							inflater.inflate( entry.data );
+							entry.setValid( true );
 								
 							inflater.end();
 							byteStream.close();
@@ -145,6 +164,8 @@ public class VolatileOpenConnectomeRandomAccessibleInterval extends AbstractOpen
 	
 	public class VolatileOpenConnectomeRandomAccess extends AbstractOpenConnectomeRandomAccess
 	{
+		protected Entry entry;
+		
 		public VolatileOpenConnectomeRandomAccess()
 		{
 			super( new VolatileRealType< UnsignedByteType >( new UnsignedByteType() ) );
@@ -158,7 +179,8 @@ public class VolatileOpenConnectomeRandomAccessibleInterval extends AbstractOpen
 		@Override
 		public VolatileRealType< UnsignedByteType > get()
 		{
-			t.get().set( 0xff & pixels[ ( zMod * cellHeight + yMod ) * cellWidth + xMod ] );
+			t.get().set( 0xff & entry.data[ ( zMod * cellHeight + yMod ) * cellWidth + xMod ] );
+			t.setValid( entry.valid );
 			return t;
 		}
 
@@ -173,27 +195,33 @@ public class VolatileOpenConnectomeRandomAccessibleInterval extends AbstractOpen
 		{
 			return copy();
 		}
+		
+		@Override
+		protected void fetchPixels()
+		{
+			entry = VolatileOpenConnectomeRandomAccessibleInterval.this.fetchPixels( xDiv, yDiv, zDiv );
+		}
 	}
 	
 	final protected Fetcher fetcher;
 	final protected LinkedList< Reference< Entry > > queue = new LinkedList< Reference< Entry > >();
 	
-	public VolatileOpenConnectomeRandomAccessibleInterval( final String url, final long width, final long height, final long depth, final int cellWidth, final int cellHeight, final int cellDepth, final long minZ )
+	public VolatileOpenConnectomeRandomAccessibleInterval( final String url, final long width, final long height, final long depth, final int cellWidth, final int cellHeight, final int cellDepth, final long minZ, final int level )
 	{
-		super( url, width, height, depth, cellWidth, cellHeight, cellDepth, minZ );
+		super( url, width, height, depth, cellWidth, cellHeight, cellDepth, minZ, level );
 		
 		fetcher = new Fetcher();
 		fetcher.start();
 	}
 	
-	public VolatileOpenConnectomeRandomAccessibleInterval( final String url, final long width, final long height, final long depth, final long minZ )
+	public VolatileOpenConnectomeRandomAccessibleInterval( final String url, final long width, final long height, final long depth, final long minZ, final int level )
 	{
-		this( url, width, height, depth, 64, 64, 64, minZ );
+		this( url, width, height, depth, 64, 64, 64, minZ, level );
 	}
 	
-	public VolatileOpenConnectomeRandomAccessibleInterval( final String url, final long width, final long height, final long depth )
+	public VolatileOpenConnectomeRandomAccessibleInterval( final String url, final long width, final long height, final long depth, final int level )
 	{
-		this( url, width, height, depth, 0 );
+		this( url, width, height, depth, 0, level );
 	}
 	
 	@Override
@@ -216,22 +244,24 @@ public class VolatileOpenConnectomeRandomAccessibleInterval extends AbstractOpen
 	}
 		
 	@Override
-	protected byte[] fetchPixels2( final long x, final long y, final long z )
+	protected Entry fetchPixels2( final long x, final long y, final long z )
 	{
 		final Reference< Entry > ref;
+		final Key key;
 		synchronized ( cache )
 		{
-			final Key key = new Key( x, y, z );
+			key = new Key( x, y, z );
 			final Reference< Entry > cachedReference = cache.get( key );
 			if ( cachedReference != null )
 			{
 				final Entry cachedEntry = cachedReference.get();
 				if ( cachedEntry != null )
-					return cachedEntry.data;
+					return cachedEntry;
 			}
 			
 			final byte[] bytes = new byte[ cellWidth * cellHeight * cellDepth ];
-			ref = new WeakReference< Entry >( new Entry( key, bytes ) );
+			ref = new WeakReference< Entry >( new Entry( key, bytes, false ) );
+			//ref = new SoftReference< Entry >( new Entry( key, bytes, false ) );
 			cache.put( key, ref );
 			queue.add( ref );
 		}
@@ -242,10 +272,9 @@ public class VolatileOpenConnectomeRandomAccessibleInterval extends AbstractOpen
 		
 		final Entry entry = ref.get();
 		if ( entry != null )
-			return entry.data;
+			return entry;
 		else
-			return new byte[ cellWidth * cellHeight * cellDepth ];
-		
+			return new Entry( key, new byte[ cellWidth * cellHeight * cellDepth ], false );
 	}
 	
 	@Override
