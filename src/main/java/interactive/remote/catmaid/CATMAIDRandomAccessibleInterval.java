@@ -53,7 +53,7 @@ import net.imglib2.Localizable;
 import net.imglib2.RandomAccess;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.converter.TypeIdentity;
-import net.imglib2.display.projector.Projector2D;
+import net.imglib2.display.projector.IterableIntervalProjector2D;
 import net.imglib2.display.screenimage.awt.ARGBScreenImage;
 import net.imglib2.type.numeric.ARGBType;
 
@@ -693,7 +693,7 @@ public class CATMAIDRandomAccessibleInterval extends AbstractInterval implements
 				256,
 				256 );
 		final ARGBScreenImage screenImage = new ARGBScreenImage( 1024, 1024 );
-		final Projector2D< ARGBType, ARGBType > projector = new Projector2D< ARGBType, ARGBType >( 0, 1, map, screenImage, new TypeIdentity< ARGBType >() );
+		final IterableIntervalProjector2D< ARGBType, ARGBType > projector = new IterableIntervalProjector2D< ARGBType, ARGBType >( 0, 1, map, screenImage, new TypeIdentity< ARGBType >() );
 		projector.map();
 		new ImagePlus( "map", new ColorProcessor( screenImage.image() ) ).show();
 	}
