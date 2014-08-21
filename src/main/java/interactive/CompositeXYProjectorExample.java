@@ -58,6 +58,19 @@ import net.imglib2.meta.ImgPlus;
 import net.imglib2.type.numeric.ARGBType;
 import net.imglib2.type.numeric.RealType;
 
+/**
+ * An example demonstrating how to use the
+ * {@link net.imglib2.display.projector.Projector} and
+ * {@link net.imglib2.converter.Converter} API, particularly
+ * {@link CompositeXYProjector} and {@link RealLUTConverter}.
+ * <p>
+ * This example demonstrates how to map an N-dimensional
+ * {@link net.imglib2.RandomAccessibleInterval} onto a {@link BufferedImage} for
+ * on-screen display.
+ * </p>
+ * 
+ * @author Curtis Rueden
+ */
 public class CompositeXYProjectorExample {
 
 	public static void main(final String[] args) throws Exception {
@@ -92,7 +105,8 @@ public class CompositeXYProjectorExample {
 		final int scaledHeight = (int) Math.min(height, 2000);
 
 		// create the composite converters
-		final ArrayList<Converter<T, ARGBType>> converters = new ArrayList<>();
+		final ArrayList<Converter<T, ARGBType>> converters =
+			new ArrayList<Converter<T, ARGBType>>();
 		for (int c=0; c<channels; c++) {
 			final ColorTable colorTable;
 			switch (c) {
@@ -104,9 +118,9 @@ public class CompositeXYProjectorExample {
 				case 5: colorTable = ColorTables.YELLOW; break;
 				default: colorTable = ColorTables.GRAYS; break;
 			}
-			// NB: Autoscales each channel. This may not be what you want!
-			final double min = 0; //img.getChannelMinimum(c);
-			final double max = 255; //img.getChannelMaximum(c);
+			// NB: For some data types, [0, 255] may not be what you want here...
+			final double min = 0;
+			final double max = 255;
 			converters.add(new RealLUTConverter<T>(min, max, colorTable));
 		}
 
@@ -129,7 +143,7 @@ public class CompositeXYProjectorExample {
 		final ImageIcon imageIcon = new ImageIcon(bi, img.getName());
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.getContentPane().add(new JLabel(imageIcon), BorderLayout.CENTER);
-		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
 	}
