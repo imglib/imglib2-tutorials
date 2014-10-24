@@ -50,6 +50,8 @@ package render.volume;
 
 import ij.IJ;
 import ij.ImageJ;
+import io.scif.img.ImgIOException;
+import io.scif.img.ImgOpener;
 import net.imglib2.Cursor;
 import net.imglib2.ExtendedRandomAccessibleInterval;
 import net.imglib2.FinalRealInterval;
@@ -67,8 +69,6 @@ import net.imglib2.img.display.imagej.ImageJFunctions;
 import net.imglib2.img.imageplus.ImagePlusImg;
 import net.imglib2.img.imageplus.ImagePlusImgs;
 import net.imglib2.interpolation.randomaccess.NLinearInterpolatorFactory;
-import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
 import net.imglib2.meta.ImgPlus;
 import net.imglib2.realtransform.AffineTransform3D;
 import net.imglib2.realtransform.InvertibleRealTransformSequence;
