@@ -126,7 +126,7 @@ public class Example7
 		}
 
 		// create the output image
-		Img< T > output = factory.create( pixelSize, Util.getTypeFromRealRandomAccess( source ) );
+		Img< T > output = factory.create( pixelSize, source.realRandomAccess().get() );
 
 		// cursor to iterate over all pixels
 		Cursor< T > cursor = output.localizingCursor();

@@ -82,7 +82,7 @@ public class Example6b
 		ImageJFunctions.show( image ).setTitle( "drosophila wing");
 
 		// compute & show fourier convolution (in-place)
-		new FFTConvolution<FloatType>( image, kernel ).run();
+		new FFTConvolution<FloatType>( image, kernel ).convolve();
 		ImageJFunctions.show( image )
 			.setTitle( "convolution" );
 	}

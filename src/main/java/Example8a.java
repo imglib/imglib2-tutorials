@@ -36,19 +36,19 @@ import java.util.Random;
 
 import net.imglib2.FinalInterval;
 import net.imglib2.IterableRealInterval;
+import net.imglib2.KDTree;
 import net.imglib2.Point;
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.RealInterval;
 import net.imglib2.RealPoint;
+import net.imglib2.RealPointSampleList;
 import net.imglib2.RealRandomAccessible;
 import net.imglib2.algorithm.gauss.Gauss;
-import net.imglib2.collection.KDTree;
-import net.imglib2.collection.RealPointSampleList;
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgFactory;
 import net.imglib2.img.display.imagej.ImageJFunctions;
-import net.imglib2.interpolation.neighborsearch.NearestNeighborInterpolatorFactory;
+import net.imglib2.interpolation.neighborsearch.NearestNeighborSearchInterpolatorFactory;
 import net.imglib2.neighborsearch.NearestNeighborSearch;
 import net.imglib2.neighborsearch.NearestNeighborSearchOnKDTree;
 import net.imglib2.type.numeric.real.FloatType;
@@ -77,7 +77,7 @@ public class Example8a
 
 		// make it into RealRandomAccessible using nearest neighbor search
 		RealRandomAccessible< FloatType > realRandomAccessible =
-			Views.interpolate( search, new NearestNeighborInterpolatorFactory< FloatType >() );
+			Views.interpolate( search, new NearestNeighborSearchInterpolatorFactory< FloatType >() );
 
 		// convert it into a RandomAccessible which can be displayed
 		RandomAccessible< FloatType > randomAccessible = Views.raster( realRandomAccessible );
