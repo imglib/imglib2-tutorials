@@ -31,6 +31,8 @@
  * #L%
  */
 import ij.ImageJ;
+import io.scif.img.ImgIOException;
+import io.scif.img.ImgOpener;
 import net.imglib2.Cursor;
 import net.imglib2.FinalRealInterval;
 import net.imglib2.RealInterval;
@@ -43,8 +45,6 @@ import net.imglib2.img.display.imagej.ImageJFunctions;
 import net.imglib2.interpolation.randomaccess.LanczosInterpolatorFactory;
 import net.imglib2.interpolation.randomaccess.NLinearInterpolatorFactory;
 import net.imglib2.interpolation.randomaccess.NearestNeighborInterpolatorFactory;
-import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
 import net.imglib2.type.Type;
 import net.imglib2.type.numeric.real.FloatType;
 import net.imglib2.util.Util;
@@ -126,7 +126,7 @@ public class Example7
 		}
 
 		// create the output image
-		Img< T > output = factory.create( pixelSize, Util.getTypeFromRealRandomAccess( source ) );
+		Img< T > output = factory.create( pixelSize, source.realRandomAccess().get() );
 
 		// cursor to iterate over all pixels
 		Cursor< T > cursor = output.localizingCursor();
