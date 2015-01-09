@@ -47,14 +47,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
+import net.imagej.ImgPlus;
+import net.imagej.axis.Axes;
 import net.imglib2.converter.Converter;
 import net.imglib2.converter.RealLUTConverter;
 import net.imglib2.display.ColorTable;
 import net.imglib2.display.ColorTable8;
 import net.imglib2.display.projector.composite.CompositeXYProjector;
 import net.imglib2.display.screenimage.awt.ARGBScreenImage;
-import net.imglib2.meta.Axes;
-import net.imglib2.meta.ImgPlus;
 import net.imglib2.type.numeric.ARGBType;
 import net.imglib2.type.numeric.RealType;
 
