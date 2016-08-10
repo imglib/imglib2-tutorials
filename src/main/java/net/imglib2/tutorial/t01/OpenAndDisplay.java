@@ -44,7 +44,7 @@ import net.imglib2.type.numeric.integer.UnsignedByteType;
 /**
  * Open and display an image.
  *
- * @author Tobias Pietzsch <tobias.pietzsch@gmail.com>
+ * @author Tobias Pietzsch
  */
 public class OpenAndDisplay
 {

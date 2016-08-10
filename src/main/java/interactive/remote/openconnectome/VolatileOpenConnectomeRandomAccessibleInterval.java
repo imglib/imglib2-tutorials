@@ -79,7 +79,7 @@ import net.imglib2.type.volatiles.VolatileRealType;
  * 0-coordinate in <em>z</em> and should point to the first slice of the
  * dataset.</p> 
  * 
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  */
 public class VolatileOpenConnectomeRandomAccessibleInterval extends
 		AbstractOpenConnectomeRandomAccessibleInterval< VolatileRealType< UnsignedByteType >, VolatileOpenConnectomeRandomAccessibleInterval.Entry >

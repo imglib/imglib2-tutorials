@@ -47,7 +47,7 @@ import net.imglib2.type.numeric.ARGBType;
 /**
  * Create an empty image and set some pixels - generically.
  *
- * @author Tobias Pietzsch <tobias.pietzsch@gmail.com>
+ * @author Tobias Pietzsch
  */
 public class DrawWhitePixelsGeneric
 {

@@ -55,7 +55,7 @@ import net.imglib2.type.numeric.NumericType;
 /**
  * 
  *
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  */
 public interface RowAccumulator< T extends NumericType< ? > >
 {

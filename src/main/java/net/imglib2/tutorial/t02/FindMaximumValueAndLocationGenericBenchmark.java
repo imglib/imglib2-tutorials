@@ -48,7 +48,7 @@ import net.imglib2.type.numeric.integer.UnsignedByteType;
  * The first one is findmax() from FindMaximumValueAndLocationGeneric which copies the cursor everytime a better max is found.
  * The second one findmax2() localizes and copies the value everytime a better max is found.
  *
- * @author Tobias Pietzsch <tobias.pietzsch@gmail.com>
+ * @author Tobias Pietzsch
  */
 public class FindMaximumValueAndLocationGenericBenchmark
 {

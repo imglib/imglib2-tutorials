@@ -41,7 +41,7 @@ import net.imglib2.type.numeric.real.DoubleType;
 /**
  * 
  *
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  */
 public class DoubleMandelbox extends AbstractMandelbox< DoubleType >
 {

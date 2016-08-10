@@ -42,7 +42,7 @@ import net.imglib2.type.numeric.integer.UnsignedByteType;
 /**
  * Create and display a 400x320 8-bit gray-level image.
  *
- * @author Tobias Pietzsch <tobias.pietzsch@gmail.com>
+ * @author Tobias Pietzsch
  */
 public class CreateAndDisplay
 {

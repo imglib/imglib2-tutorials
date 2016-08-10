@@ -41,7 +41,7 @@ import net.imglib2.RealRandomAccessible;
 /**
  * 
  *
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  */
 abstract public class AbstractMandelbox< T > implements RealRandomAccessible< T >
 {

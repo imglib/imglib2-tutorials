@@ -44,7 +44,7 @@ import net.imglib2.type.numeric.integer.UnsignedByteType;
 /**
  * Load an image and find the maximum value.
  *
- * @author Tobias Pietzsch <tobias.pietzsch@gmail.com>
+ * @author Tobias Pietzsch
  */
 public class FindMaximumValue
 {

@@ -68,7 +68,7 @@ import net.imglib2.type.numeric.integer.UnsignedByteType;
  * 0-coordinate in <em>z</em> and should point to the first slice of the
  * dataset.</p> 
  * 
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  */
 public class OpenConnectomeRandomAccessibleInterval extends
 	AbstractOpenConnectomeRandomAccessibleInterval< UnsignedByteType, OpenConnectomeRandomAccessibleInterval.Entry >

@@ -41,7 +41,7 @@ import net.imglib2.type.numeric.integer.LongType;
 /**
  * 
  *
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  */
 public class Mandelbox extends AbstractMandelbox< LongType >
 {

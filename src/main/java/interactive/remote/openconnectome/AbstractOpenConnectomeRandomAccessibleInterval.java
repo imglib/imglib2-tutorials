@@ -76,7 +76,7 @@ import net.imglib2.type.numeric.RealType;
  * 0-coordinate in <em>z</em> and should point to the first slice of the
  * dataset.</p> 
  * 
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  */
 abstract public class AbstractOpenConnectomeRandomAccessibleInterval< T extends RealType< T >, E extends AbstractRemoteRandomAccessibleInterval< T, AbstractOpenConnectomeRandomAccessibleInterval< T, E >.Key, E >.Entry > extends AbstractRemoteRandomAccessibleInterval< T, AbstractOpenConnectomeRandomAccessibleInterval< T, E >.Key, E >
 {

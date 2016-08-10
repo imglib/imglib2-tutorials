@@ -59,7 +59,7 @@ import net.imglib2.RandomAccessibleInterval;
 /**
  * Read pixels served by a remote service.
  * 
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  */
 abstract public class AbstractRemoteRandomAccessibleInterval< T, K, E > extends AbstractInterval implements RandomAccessibleInterval< T >
 {

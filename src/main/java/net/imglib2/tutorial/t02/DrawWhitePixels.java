@@ -45,7 +45,7 @@ import net.imglib2.type.numeric.integer.UnsignedByteType;
 /**
  * Create an empty 8-bit image and set some pixels.
  *
- * @author Tobias Pietzsch <tobias.pietzsch@gmail.com>
+ * @author Tobias Pietzsch
  */
 public class DrawWhitePixels
 {

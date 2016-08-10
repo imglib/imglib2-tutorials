@@ -92,7 +92,7 @@ import net.imglib2.view.composite.RealComposite;
 /**
  * 
  *
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  */
 public class VolumeRenderer
 {

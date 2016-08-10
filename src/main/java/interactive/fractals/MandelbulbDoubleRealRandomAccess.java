@@ -43,7 +43,7 @@ import net.imglib2.type.numeric.real.DoubleType;
  * for the mandelbulb set as described by Daniel White and Paul Nylander
  * <a href="http://www.skytopia.com/project/fractal/mandelbulb.html">http://www.skytopia.com/project/fractal/mandelbulb.html</a>
  *
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  */
 public class MandelbulbDoubleRealRandomAccess extends RealPoint implements RealRandomAccess< DoubleType >
 {

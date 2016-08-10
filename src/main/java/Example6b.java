@@ -49,7 +49,7 @@
  * library, which is released under the terms of the Common Public License -
  * v1.0, which is available at http://www.eclipse.org/legal/cpl-v10.html
  *
- * @author Stephan Preibisch (stephan.preibisch@gmx.de)
+ * @author Stephan Preibisch
  */
 import ij.ImageJ;
 import io.scif.img.ImgIOException;

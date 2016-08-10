@@ -62,7 +62,7 @@ import net.imglib2.type.numeric.ARGBType;
  * A read-only {@link RandomAccessibleInterval} of ARGBTypes that generates its
  * pixel values from a CATMAID remote data set.
  * 
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  */
 public class CATMAIDRandomAccessibleInterval extends AbstractInterval implements RandomAccessibleInterval< ARGBType >
 {

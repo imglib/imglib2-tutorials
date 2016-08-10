@@ -57,7 +57,7 @@ import net.imglib2.view.composite.RealComposite;
 /**
  * 
  *
- * @author Stephan Saalfeld <saalfeld@mpi-cbg.de>
+ * @author Stephan Saalfeld
  * @version 0.1a
  */
 public class RealCompositeARGBDoubleConverter< T extends RealType< T > > implements Converter< RealComposite< T >, ARGBDoubleType >

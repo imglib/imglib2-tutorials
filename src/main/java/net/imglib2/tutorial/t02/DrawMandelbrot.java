@@ -44,7 +44,7 @@ import net.imglib2.type.numeric.integer.UnsignedByteType;
 /**
  * Use {@link MandelbrotRealRandomAccess} to render a mandelbrot fractal.
  *
- * @author Tobias Pietzsch <tobias.pietzsch@gmail.com>
+ * @author Tobias Pietzsch
  */
 public class DrawMandelbrot
 {
