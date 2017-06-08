@@ -351,4 +351,10 @@ public class LifeForm implements NumericType<LifeForm>, NativeType<LifeForm>
 	 */
 	@Override
 	public Fraction getEntitiesPerPixel(){ return new Fraction(2, 1); }
+
+	@Override
+	public boolean valueEquals( final LifeForm that )
+	{
+		return this.getName() == that.getName() && this.getWeight() == that.getWeight();
+	}
 }
