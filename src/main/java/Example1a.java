@@ -46,8 +46,8 @@ import net.imglib2.type.numeric.NumericType;
 /**
  * Opens a file with ImageJ and wraps it into an ImgLib {@link Img}.
  *
- * @author Stephan Preibisch & Stephan Saalfeld
- *
+ * @author Stephan Preibisch
+ * @author Stephan Saalfeld
  */
 public class Example1a
 {

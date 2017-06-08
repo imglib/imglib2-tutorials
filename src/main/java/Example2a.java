@@ -43,8 +43,8 @@ import net.imglib2.type.numeric.real.FloatType;
 /**
  * Here we want to copy an Image into another one using a generic method
  *
- * @author Stephan Preibisch & Stephan Saalfeld
- *
+ * @author Stephan Preibisch
+ * @author Stephan Saalfeld
  */
 public class Example2a
 {

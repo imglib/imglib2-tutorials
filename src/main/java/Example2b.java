@@ -48,8 +48,8 @@ import net.imglib2.type.numeric.real.FloatType;
  * Here we want to copy an ArrayImg into a CellImg using a generic method,
  * but we cannot do it with simple Cursors as they have a different iteration order.
  *
- * @author Stephan Preibisch & Stephan Saalfeld
- *
+ * @author Stephan Preibisch
+ * @author Stephan Saalfeld
  */
 public class Example2b
 {

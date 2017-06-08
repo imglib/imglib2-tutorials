@@ -39,11 +39,13 @@ import net.imglib2.display.AbstractLinearRange;
 import net.imglib2.type.numeric.ARGBType;
 
 /**
- * The LifeFormARGBConverter creates an ARGB representation of a LifeForm by implementing the interface 
- * Converter< LifeForm, ARGBType >. Currently, up to seven different races can be mapped into seven different
- * colors for display. Note that the simulation itself supports an arbitrary number of Life Forms. The weight 
- * of a LifeForm will represent its intensity by mapping its float value to a value between 0...255, based on
- * the minimal and maximal weight of the entire Arena.
+ * The LifeFormARGBConverter creates an ARGB representation of a LifeForm by
+ * implementing the interface {@code Converter<LifeForm, ARGBType>}. Currently,
+ * up to seven different races can be mapped into seven different colors for
+ * display. Note that the simulation itself supports an arbitrary number of Life
+ * Forms. The weight of a LifeForm will represent its intensity by mapping its
+ * float value to a value between 0...255, based on the minimal and maximal
+ * weight of the entire Arena.
  *
  * @author Stephan Preibisch
  * @author Stephan Saalfeld

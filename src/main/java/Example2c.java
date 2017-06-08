@@ -49,8 +49,8 @@ import net.imglib2.view.Views;
  * Here we want to copy an Image into another with a different Container one using a generic method,
  * using a LocalizingCursor and a RandomAccess
  *
- * @author Stephan Preibisch & Stephan Saalfeld
- *
+ * @author Stephan Preibisch
+ * @author Stephan Saalfeld
  */
 public class Example2c
 {

@@ -69,8 +69,8 @@ import net.imglib2.util.RealSum;
 /**
  * Perform template matching by convolution in the Fourier domain
  *
- * @author Stephan Preibisch & Stephan Saalfeld
- *
+ * @author Stephan Preibisch
+ * @author Stephan Saalfeld
  */
 public class Example6c
 {

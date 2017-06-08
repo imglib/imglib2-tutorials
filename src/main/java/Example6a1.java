@@ -42,8 +42,8 @@ import net.imglib2.type.numeric.real.FloatType;
 /**
  * Use of Gaussian Convolution on the Image
  *
- * @author Stephan Preibisch & Stephan Saalfeld
- *
+ * @author Stephan Preibisch
+ * @author Stephan Saalfeld
  */
 public class Example6a1
 {

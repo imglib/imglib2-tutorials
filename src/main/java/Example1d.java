@@ -41,7 +41,7 @@ import net.imglib2.type.numeric.real.FloatType;
 import net.imglib2.view.Views;
 
 /**
- * Open an ArrayImg< FloatType > and display partly and rotated
+ * Open an {@code ArrayImg<FloatType>} and display partly and rotated
  */
 public class Example1d
 {

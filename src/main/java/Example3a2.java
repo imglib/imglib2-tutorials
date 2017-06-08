@@ -41,10 +41,10 @@ import net.imglib2.type.Type;
 import net.imglib2.type.numeric.real.FloatType;
 
 /**
- * Perform a generic min & max search
+ * Perform a generic min and max search
  *
- * @author Stephan Preibisch & Stephan Saalfeld
- *
+ * @author Stephan Preibisch
+ * @author Stephan Saalfeld
  */
 public class Example3a2
 {

@@ -45,8 +45,8 @@ import net.imglib2.view.Views;
 /**
  * Use of Gaussian Convolution on the Image
  *
- * @author Stephan Preibisch & Stephan Saalfeld
- *
+ * @author Stephan Preibisch
+ * @author Stephan Saalfeld
  */
 public class Example6a4
 {
