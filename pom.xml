@@ -121,6 +121,7 @@ Mark Longair, Brian Northan, Nick Perry, Curtis Rueden, Johannes Schindelin,
 Jean-Yves Tinevez and Michael Zinsmaier.</license.copyrightOwners>
 
 		<imglib2.version>4.3.0</imglib2.version>
+		<scifio.version>0.32.0</scifio.version>
 	</properties>
 
 	<repositories>
