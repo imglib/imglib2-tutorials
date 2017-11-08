@@ -176,6 +176,13 @@ Jean-Yves Tinevez and Michael Zinsmaier.</license.copyrightOwners>
 			<groupId>io.scif</groupId>
 			<artifactId>scifio</artifactId>
 		</dependency>
+
+		<!-- Test scope dependencies -->
+		<dependency>
+			<groupId>sc.fiji</groupId>
+			<artifactId>bigdataviewer-vistools</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
