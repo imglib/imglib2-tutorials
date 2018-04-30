@@ -69,11 +69,12 @@ public class Example6b
 {
 	public Example6b() throws ImgIOException, IncompatibleTypeException
 	{
-		// open with ImgOpener using an ArrayImgFactory
-		final Img< FloatType > image = new ImgOpener().openImg( "DrosophilaWing.tif",
-			new FloatType() );
-		final Img< FloatType > kernel = new ImgOpener().openImg( "kernelRing.tif",
-			new FloatType() );
+		// open with SCIFIO ImgOpener using an ArrayImgFactory
+		final ImgOpener io = new ImgOpener();
+		final Img< FloatType > image = io.openImgs( "DrosophilaWing.tif",
+			new FloatType() ).get( 0 );
+		final Img< FloatType > kernel = io.openImgs( "kernelRing.tif",
+			new FloatType() ).get( 0 );
 
 		// normalize the kernel, otherwise we add energy to the image
 		norm( kernel );
@@ -83,7 +84,7 @@ public class Example6b
 		ImageJFunctions.show( image ).setTitle( "drosophila wing");
 
 		// compute & show fourier convolution (in-place)
-		new FFTConvolution<FloatType>( image, kernel ).convolve();
+		new FFTConvolution<>( image, kernel ).convolve();
 		ImageJFunctions.show( image )
 			.setTitle( "convolution" );
 	}

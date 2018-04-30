@@ -50,8 +50,10 @@
  * v1.0, which is available at http://www.eclipse.org/legal/cpl-v10.html
  */
 import ij.ImageJ;
+
 import io.scif.img.ImgIOException;
 import io.scif.img.ImgOpener;
+
 import net.imglib2.algorithm.fft.FourierConvolution;
 import net.imglib2.algorithm.fft.FourierTransform;
 import net.imglib2.algorithm.fft.InverseFourierTransform;
@@ -76,11 +78,12 @@ public class Example6c
 {
 	public Example6c() throws ImgIOException, IncompatibleTypeException
 	{
-		// open with ImgOpener as FloatTypes
-		final Img< FloatType > image = new ImgOpener().openImg( "DrosophilaWing.tif",
-			new FloatType() );
-		final Img< FloatType > template = new ImgOpener().openImg( "WingTemplate.tif",
-			new FloatType() );
+		// open with SCIFIO ImgOpener as FloatTypes
+		ImgOpener io = new ImgOpener();
+		final Img< FloatType > image = io.openImgs( "DrosophilaWing.tif",
+			new FloatType() ).get( 0 );
+		final Img< FloatType > template = io.openImgs( "WingTemplate.tif",
+			new FloatType() ).get( 0 );
 
 		// display image and template
 		ImageJFunctions.show( image ).setTitle( "input" );
@@ -88,8 +91,7 @@ public class Example6c
 
 		// compute fourier transform of the template
 		final FourierTransform< FloatType, ComplexFloatType > fft =
-			new FourierTransform< FloatType, ComplexFloatType >(
-				template, new ComplexFloatType() );
+			new FourierTransform<>(template, new ComplexFloatType() );
 		fft.process();
 		final Img< ComplexFloatType > templateFFT = fft.getResult();
 
@@ -120,7 +122,7 @@ public class Example6c
 
 		// compute inverse fourier transform of the template
 		final InverseFourierTransform< FloatType, ComplexFloatType > ifft =
-			new InverseFourierTransform< FloatType, ComplexFloatType >( templateFFT, fft );
+			new InverseFourierTransform<>( templateFFT, fft );
 		ifft.process();
 		final Img< FloatType > templateInverse = ifft.getResult();
 

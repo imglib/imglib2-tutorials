@@ -32,8 +32,10 @@
  * #L%
  */
 import ij.ImageJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.Cursor;
 import net.imglib2.IterableInterval;
 import net.imglib2.RandomAccess;
@@ -57,11 +59,10 @@ public class Example2c
 	public Example2c() throws ImgIOException
 	{
 		// open with ImgOpener as a float
-		Img<FloatType> img = new ImgOpener().openImg("DrosophilaWing.tif",
-			new FloatType());
+		Img< FloatType > img = IO.openImgs( "DrosophilaWing.tif", new FloatType() ).get( 0 );
 
 		// copy & display an image
-		Img< FloatType > duplicate = img.factory().create( img, img.firstElement() );
+		Img< FloatType > duplicate = img.factory().create( img );
 		copy( img, duplicate );
 		ImageJFunctions.show( duplicate );
 

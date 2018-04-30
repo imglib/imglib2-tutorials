@@ -32,8 +32,8 @@
  * #L%
  */
 
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
 
 import java.util.Iterator;
 
@@ -55,8 +55,8 @@ public class Example3a1
 	public < T extends RealType< T > & NativeType< T > > Example3a1()
 		throws ImgIOException
 	{
-		// open with ImgOpener (he will decide which Img is best)
-		Img< T > img = (Img< T >) new ImgOpener().openImg( "DrosophilaWing.tif" );
+		// open with SCIFIO (it will decide which Img is best)
+		Img< T > img = ( Img< T > ) IO.openImgs( "DrosophilaWing.tif" ).get( 0 );
 
 		// create two empty variables
 		T min = img.firstElement().createVariable();

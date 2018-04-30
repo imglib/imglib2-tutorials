@@ -32,8 +32,10 @@
  * #L%
  */
 import ij.ImageJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccess;
 import net.imglib2.img.Img;
@@ -59,12 +61,11 @@ public class Example2b
 		// open with ImgOpener. In addition to using ImgOptions, we can directly
 		// pass an ImgFactory to the ImgOpener. This bypasses the Img selection
 		// heuristic and allows custom ImgFactory implementations to be used
-		Img< FloatType > img = (Img< FloatType >) new ImgOpener().openImg( "DrosophilaWing.tif",
-			new ArrayImgFactory< FloatType >() );
+		Img< FloatType > img = IO.openImgs( "DrosophilaWing.tif", new ArrayImgFactory<>( new FloatType() ) ).get( 0 );
 
 		// copy the image into a CellImg with a cellsize of 20x20
-//		Img< FloatType > duplicate = copyImageWrong( img, new CellImgFactory< FloatType >( 20 ) );
-		Img< FloatType > duplicate = copyImageCorrect( img, new CellImgFactory< FloatType >( 20 ) );
+//		Img< FloatType > duplicate = copyImageWrong( img, new CellImgFactory<>( new FloatType(), 20 ) );
+		Img< FloatType > duplicate = copyImageCorrect( img, new CellImgFactory<>( new FloatType(), 20 ) );
 
 		// display the copy and the original
 		ImageJFunctions.show( img );
@@ -80,7 +81,7 @@ public class Example2b
 		// create a new Image with the same dimensions but the other imgFactory
 		// note that the input provides the size for the new image as it
 		// implements the Interval interface
-		Img< T > output = imgFactory.create( input, input.firstElement() );
+		Img< T > output = imgFactory.create( input );
 
 		// create a cursor for both images
 		Cursor< T > cursorInput = input.cursor();
@@ -109,7 +110,7 @@ public class Example2b
   {
     // create a new Image with the same dimensions but the other imgFactory
     // note that the input provides the size for the new image by implementing the Interval interface
-    Img< T > output = imgFactory.create( input, input.firstElement() );
+    Img< T > output = imgFactory.create( input );
 
     // create a cursor that automatically localizes itself on every move
     Cursor< T > cursorInput = input.localizingCursor();

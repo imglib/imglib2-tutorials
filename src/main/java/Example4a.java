@@ -55,10 +55,8 @@ public class Example4a
 {
 	public Example4a()
 	{
-		// open with ImgOpener using an ImagePlusImg
-		ImagePlusImg< UnsignedByteType, ?> img
-			= new ImagePlusImgFactory< UnsignedByteType >().create(
-				new long[] { 256, 256, 256 }, new UnsignedByteType() );
+		// create an ImagePlusImg
+		ImagePlusImg< UnsignedByteType, ? > img = new ImagePlusImgFactory<>( new UnsignedByteType() ).create( 256, 256, 256 );
 
 		// draw a small sphere for every pixel of a larger sphere
 		drawSpheres( img, 0, 255 );
@@ -116,7 +114,7 @@ public class Example4a
 
 		// define a hypersphere (n-dimensional sphere)
 		HyperSphere< T > hyperSphere =
-			new HyperSphere<T>( randomAccessible, center, radiusLargeSphere );
+			new HyperSphere<>( randomAccessible, center, radiusLargeSphere );
 
 		// create a cursor on the hypersphere
 		HyperSphereCursor< T > cursor = hyperSphere.cursor();
@@ -131,7 +129,7 @@ public class Example4a
 			// instantiate a small hypersphere at the location of the current pixel
 			// in the large hypersphere
 			HyperSphere< T > smallSphere =
-				new HyperSphere< T >( randomAccessible, cursor, radius );
+				new HyperSphere<>( randomAccessible, cursor, radius );
 
 			// define the random intensity for this small sphere
 			double randomValue = rnd.nextDouble();

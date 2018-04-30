@@ -32,8 +32,9 @@
  * #L%
  */
 import ij.ImageJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
 
 import java.util.Random;
 
@@ -69,9 +70,9 @@ public class Example8b
 {
 	public Example8b() throws ImgIOException
 	{
-		// open with ImgOpener using a FloatType
-		Img< FloatType > img = new ImgOpener().openImg( "DrosophilaWingSmall.tif",
-			 new FloatType() );
+		// open with SCIFIO using a FloatType
+		Img< FloatType > img = IO.openImgs( "DrosophilaWingSmall.tif",
+			 new FloatType() ).get( 0 );
 
 		// show the image
 		ImageJFunctions.show( img );
@@ -112,8 +113,8 @@ public class Example8b
 		IterableRealInterval< T > realInterval = sampleRandomPoints( input, interval, numPoints );
 
 		// using nearest neighbor search we will be able to return a value an any position in space
-		NearestNeighborSearch< T > search = new NearestNeighborSearchOnKDTree< T >(
-			new KDTree< T > ( realInterval ) );
+		NearestNeighborSearch< T > search = new NearestNeighborSearchOnKDTree<>(
+			new KDTree<>( realInterval ) );
 
 		// make it into RealRandomAccessible using nearest neighbor search
 		RealRandomAccessible< T > realRandomAccessible = Views.interpolate( search,
@@ -144,8 +145,8 @@ public class Example8b
 		IterableRealInterval< T > realInterval = sampleRandomPoints( input, interval, numPoints );
 
 		// using nearest neighbor search we will be able to return a value an any position in space
-		KNearestNeighborSearch< T > search = new KNearestNeighborSearchOnKDTree< T >(
-			new KDTree< T > ( realInterval ), Math.min( 20, (int)realInterval.size() ) );
+		KNearestNeighborSearch< T > search = new KNearestNeighborSearchOnKDTree< >(
+			new KDTree<>( realInterval ), Math.min( 20, (int)realInterval.size() ) );
 
 		// make it into RealRandomAccessible using nearest neighbor search
 		RealRandomAccessible< T > realRandomAccessible = Views.interpolate( search,
@@ -177,7 +178,7 @@ public class Example8b
 		Random rnd = new Random( 1332441549191l );
 
 		// a list of Samples with coordinates
-		RealPointSampleList< T > elements = new RealPointSampleList< T >( numDimensions );
+		RealPointSampleList< T > elements = new RealPointSampleList<>( numDimensions );
 
 		// a random accessible in the image data to grep the right value
 		RealRandomAccess< T > realRandomAccess = input.realRandomAccess();

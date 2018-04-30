@@ -35,8 +35,10 @@
 package interactive;
 
 import ij.IJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imagej.ImgPlus;
 import net.imagej.space.CalibratedSpace;
 import net.imglib2.IterableInterval;
@@ -90,7 +92,7 @@ public class InteractiveImageViewerExample
 	public static < T extends RealType< T > & NativeType< T > > void show( final RandomAccessibleInterval< T > interval, final T min, final T max, final long width, final long height )
 	{
 		final RandomAccessible< T > source = Views.extendValue( interval, min );
-		final RealARGBConverter< T > converter = new RealARGBConverter< T >( min.getRealDouble(), max.getRealDouble() );
+		final RealARGBConverter< T > converter = new RealARGBConverter<>( min.getRealDouble(), max.getRealDouble() );
 		final int n = interval.numDimensions();
 		if ( n == 2 )
 		{
@@ -109,7 +111,7 @@ public class InteractiveImageViewerExample
 				1, 0, ( width - interval.dimension( 0 ) ) / 2.0 - interval.min( 0 ),
 				0, yScale, ( height - interval.dimension( 1 ) * yScale ) / 2.0 - interval.min( 1 ) * yScale );
 
-			final InteractiveViewer2D< T > viewer = new InteractiveViewer2D< T >( ( int ) width, ( int ) height, source, initial, converter );
+			final InteractiveViewer2D< T > viewer = new InteractiveViewer2D<>( ( int ) width, ( int ) height, source, initial, converter );
 			viewer.getDisplayCanvas().addOverlayRenderer( new LogoPainter() );
 			viewer.requestRepaint();
 		}
@@ -134,7 +136,7 @@ public class InteractiveImageViewerExample
 				0, yScale,      0, ( height - interval.dimension( 1 ) * yScale ) / 2.0 - interval.min( 1 ) * yScale,
 				0,      0, zScale, -interval.dimension( 2 ) * zScale / 2.0 );
 
-			final InteractiveViewer3D< T > viewer = new InteractiveViewer3D< T >( ( int ) width, ( int ) height, source, interval, initial, converter );
+			final InteractiveViewer3D< T > viewer = new InteractiveViewer3D<>( ( int ) width, ( int ) height, source, interval, initial, converter );
 			viewer.getDisplayCanvas().addOverlayRenderer( new LogoPainter() );
 			viewer.requestRepaint();
 		}
@@ -148,8 +150,8 @@ public class InteractiveImageViewerExample
 	{
 //		final String filename = "DrosophilaWing.tif";
 		final String filename = "/Users/pietzsch/workspace/imglib/examples/l1-cns.tif";
-		final ImgPlus< FloatType > img = new ImgOpener().openImg( filename, new ArrayImgFactory< FloatType >(), new FloatType() );
-//		show( Views.interval( img, FinalInterval.createMinSize( 200, 10, 200, 200 ) ) );
+		final ImgPlus< FloatType > img = IO.openImgs( filename, new ArrayImgFactory<>( new FloatType() ) ).get( 0 );
+		//		show( Views.interval( img, FinalInterval.createMinSize( 200, 10, 200, 200 ) ) );
 		show ( img );
 	}
 }

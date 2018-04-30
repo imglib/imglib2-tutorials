@@ -48,7 +48,7 @@ public class CreateAndDisplay
 {
 	public static void main( final String[] args )
 	{
-		final Img< UnsignedByteType > img = new ArrayImgFactory< UnsignedByteType >().create( new long[] { 400, 320 }, new UnsignedByteType() );
+		final Img< UnsignedByteType > img = new ArrayImgFactory<>( new UnsignedByteType() ).create( 400, 320 );
 		ImageJFunctions.show( img );
 	}
 }

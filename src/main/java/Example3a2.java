@@ -51,7 +51,7 @@ public class Example3a2
 	public Example3a2()
 	{
 		// it will work as well on a normal ArrayList
-		ArrayList< FloatType > list = new ArrayList< FloatType >();
+		ArrayList< FloatType > list = new ArrayList<>();
 
 		// put values 0 to 10 into the ArrayList
 		for ( int i = 0; i <= 10; ++i )

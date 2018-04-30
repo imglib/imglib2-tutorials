@@ -74,7 +74,7 @@ public class DrawWhitePixelsGeneric
 
 	public static void main( final String[] args )
 	{
-		final Img< ARGBType > img = new ArrayImgFactory< ARGBType >().create( new int[] {400, 320, 100}, new ARGBType() );
+		final Img< ARGBType > img = new ArrayImgFactory<>( new ARGBType() ).create( 400, 320, 100 );
 		draw( img, new ARGBType( 0xffffffff ) );
 		ImageJFunctions.show( img );
 	}

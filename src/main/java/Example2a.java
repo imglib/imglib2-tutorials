@@ -32,8 +32,10 @@
  * #L%
  */
 import ij.ImageJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.Cursor;
 import net.imglib2.img.Img;
 import net.imglib2.img.display.imagej.ImageJFunctions;
@@ -50,9 +52,8 @@ public class Example2a
 {
 	public Example2a() throws ImgIOException
 	{
-		// open with ImgOpener as a FloatType
-		Img< FloatType > img = new ImgOpener().openImg( "DrosophilaWing.tif",
-			new FloatType() );
+		// open with SCIFIO as a FloatType
+		Img< FloatType > img = IO.openImgs( "DrosophilaWing.tif", new FloatType() ).get( 0 );
 
 		// copy the image, as it is a generic method it also works with FloatType
 		Img< FloatType > duplicate = copyImage( img );
@@ -72,7 +73,7 @@ public class Example2a
 		// create a new Image with the same properties
 		// note that the input provides the size for the new image as it implements
 		// the Interval interface
-		Img< T > output = input.factory().create( input, input.firstElement() );
+		Img< T > output = input.factory().create( input );
 
 		// create a cursor for both images
 		Cursor< T > cursorInput = input.cursor();

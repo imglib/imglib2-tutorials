@@ -35,10 +35,10 @@
 package game;
 
 import net.imglib2.img.NativeImg;
-import net.imglib2.img.NativeImgFactory;
 import net.imglib2.img.basictypeaccess.IntAccess;
 import net.imglib2.img.basictypeaccess.array.IntArray;
 import net.imglib2.type.NativeType;
+import net.imglib2.type.NativeTypeFactory;
 import net.imglib2.type.numeric.NumericType;
 import net.imglib2.util.Fraction;
 
@@ -108,22 +108,6 @@ public class LifeForm implements NumericType<LifeForm>, NativeType<LifeForm>
 	// this is the constructor if you want it to be a variable
 	public LifeForm() { this( 0, 0 ); }
 
-	// called by the NativeImgFactory to create a new NativeImg using the type of
-	// data the LifeForm requires (in this case an integer array with 2 entries per pixel)
-	@Override
-	public NativeImg<LifeForm, ? extends IntAccess> createSuitableNativeImg( final NativeImgFactory<LifeForm> storageFactory, final long dim[] )
-	{
-		// create the container (int, 2 values per pixel)
-		final NativeImg<LifeForm, ? extends IntAccess> container = storageFactory.createIntInstance( dim, new Fraction(2, 1) );
-		
-		// create a Type that is linked to the container
-		final LifeForm linkedType = new LifeForm( container );
-		
-		// pass it to the DirectAccessContainer
-		container.setLinkedType( linkedType );
-		
-		return container;
-	}
 	
 	// called by the cursor/randomAccess to update the currently active IntAccess
 	@Override
@@ -351,6 +335,14 @@ public class LifeForm implements NumericType<LifeForm>, NativeType<LifeForm>
 	 */
 	@Override
 	public Fraction getEntitiesPerPixel(){ return new Fraction(2, 1); }
+
+	private static final NativeTypeFactory< LifeForm, IntAccess > typeFactory = NativeTypeFactory.INT( img -> new LifeForm( img ) );
+
+	@Override
+	public NativeTypeFactory< LifeForm, IntAccess > getNativeTypeFactory()
+	{
+		return typeFactory;
+	}
 
 	@Override
 	public boolean valueEquals( final LifeForm that )

@@ -32,8 +32,10 @@
  * #L%
  */
 import ij.ImageJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.Cursor;
 import net.imglib2.FinalRealInterval;
 import net.imglib2.RealInterval;
@@ -48,7 +50,6 @@ import net.imglib2.interpolation.randomaccess.NLinearInterpolatorFactory;
 import net.imglib2.interpolation.randomaccess.NearestNeighborInterpolatorFactory;
 import net.imglib2.type.Type;
 import net.imglib2.type.numeric.real.FloatType;
-import net.imglib2.util.Util;
 import net.imglib2.view.Views;
 
 /**
@@ -58,23 +59,22 @@ public class Example7
 {
 	public Example7() throws ImgIOException
 	{
-		// open with ImgOpener using an ArrayImgFactory
-		Img< FloatType > img = new ImgOpener().openImg( "DrosophilaWing.tif",
-			new FloatType() );
+		// open with SCIFIO
+		Img< FloatType > img = IO.openImgs( "DrosophilaWing.tif", new FloatType() ).get( 0 );
 
 		ImageJFunctions.show( img );
 
 		// create an InterpolatorFactory RealRandomAccessible using nearst neighbor interpolation
 		NearestNeighborInterpolatorFactory< FloatType > factory1 =
-			new NearestNeighborInterpolatorFactory< FloatType >();
+			new NearestNeighborInterpolatorFactory<>();
 
 		// create an InterpolatorFactory RealRandomAccessible using linear interpolation
 		NLinearInterpolatorFactory< FloatType > factory2 =
-			new NLinearInterpolatorFactory< FloatType >();
+			new NLinearInterpolatorFactory<>();
 
 		// create an InterpolatorFactory RealRandomAccessible using lanczos interpolation
 		LanczosInterpolatorFactory< FloatType > factory3 =
-			new LanczosInterpolatorFactory< FloatType >();
+			new LanczosInterpolatorFactory<>();
 
 		// create a RandomAccessible using the factory and views method
 		// it is important to extend the image first, the interpolation scheme might
@@ -94,12 +94,9 @@ public class Example7
 
 		FinalRealInterval interval = new FinalRealInterval( min, max );
 
-		ImageJFunctions.show( magnify( interpolant1, interval,
-			new ArrayImgFactory< FloatType >(), 10 ) ).setTitle( "Nearest Neighbor Interpolation" );
-		ImageJFunctions.show( magnify( interpolant2, interval,
-			new ArrayImgFactory< FloatType >(), 10 ) ).setTitle( "Linear Interpolation" );
-		ImageJFunctions.show( magnify( interpolant3, interval,
-			new ArrayImgFactory< FloatType >(), 10 ) ).setTitle( "Lanczos Interpolation" );
+		ImageJFunctions.show( magnify( interpolant1, interval, new ArrayImgFactory<>( new FloatType() ), 10 ) ).setTitle( "Nearest Neighbor Interpolation" );
+		ImageJFunctions.show( magnify( interpolant2, interval, new ArrayImgFactory<>( new FloatType() ), 10 ) ).setTitle( "Linear Interpolation" );
+		ImageJFunctions.show( magnify( interpolant3, interval, new ArrayImgFactory<>( new FloatType() ), 10 ) ).setTitle( "Lanczos Interpolation" );
 	}
 
 	/**
@@ -127,7 +124,7 @@ public class Example7
 		}
 
 		// create the output image
-		Img< T > output = factory.create( pixelSize, source.realRandomAccess().get() );
+		Img< T > output = factory.create( pixelSize );
 
 		// cursor to iterate over all pixels
 		Cursor< T > cursor = output.localizingCursor();

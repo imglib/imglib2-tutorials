@@ -116,15 +116,15 @@ public class Arena
 
 	// the out of bounds strategy to use for gaussian convolution
 	// makes a significant difference to the result
-	final OutOfBoundsFactory< LifeForm, RandomAccessibleInterval< LifeForm > > outofbounds = new OutOfBoundsPeriodicFactory< LifeForm, RandomAccessibleInterval< LifeForm > >();
+	final OutOfBoundsFactory< LifeForm, RandomAccessibleInterval< LifeForm > > outofbounds = new OutOfBoundsPeriodicFactory<>();
 
 	public Arena( )
 	{
 		// create a new ArrayImgFactory for LifeForm
-		final ArrayImgFactory< LifeForm > factory = new ArrayImgFactory< LifeForm >();
+		final ArrayImgFactory< LifeForm > factory = new ArrayImgFactory<>( new LifeForm() );
 
 		// create the ArrayImg containing the simulation
-		final Img<LifeForm> arena = factory.create( new long[] { width, height }, new LifeForm() );
+		final Img< LifeForm > arena = factory.create( width, height );
 
 		// seed the arena with a number of random life forms
 		seedArena( arena, numSeeds, numRaces );

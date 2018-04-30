@@ -1,5 +1,7 @@
 package interactive;
 
+import io.scif.img.IO;
+
 /*
  * #%L
  * ImgLib2: a general-purpose, multidimensional image processing library.
@@ -35,7 +37,7 @@ package interactive;
  */
 
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imagej.ImgPlus;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.converter.Converter;
@@ -55,7 +57,7 @@ public class InteractiveCompositeViewer3D
 	final static public void main( final String[] args ) throws ImgIOException
 	{
 		final String filename = "/home/saalfeld/application/material/confocal/[XYZCT] overlay saalfeld-05-05-5-DPX_L9_Sum.lsm ... saalfeld-05-05-5-DPX_L10_Sum.tif";
-		final ImgPlus< UnsignedShortType > xycz = new ImgOpener().openImg( filename, new ArrayImgFactory< UnsignedShortType >(), new UnsignedShortType() );
+		final ImgPlus< UnsignedShortType > xycz = IO.openImgs( filename, new ArrayImgFactory<>( new UnsignedShortType() ) ).get( 0 );
 		final RandomAccessibleInterval< UnsignedShortType > xyzc = Views.permute( xycz, 2, 3 );
 
 		final CompositeView< UnsignedShortType, NumericComposite< UnsignedShortType > > compositeView =
@@ -89,8 +91,7 @@ public class InteractiveCompositeViewer3D
 
 		System.out.println( compositeView.numDimensions() );
 
-		final InteractiveViewer3D< NumericComposite< UnsignedShortType >> viewer =
-				new InteractiveViewer3D< NumericComposite< UnsignedShortType > >( w, h, compositeView, xyzc, initial, converter );
+		final InteractiveViewer3D< NumericComposite< UnsignedShortType > > viewer = new InteractiveViewer3D<>( w, h, compositeView, xyzc, initial, converter );
 		viewer.getDisplayCanvas().addOverlayRenderer( new LogoPainter() );
 		viewer.requestRepaint();
 	}

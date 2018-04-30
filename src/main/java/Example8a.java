@@ -73,8 +73,8 @@ public class Example8a
 
 		// using nearest neighbor search we will be able to return a value an any position in space
 		NearestNeighborSearch< FloatType > search =
-			new NearestNeighborSearchOnKDTree<FloatType>(
-				new KDTree< FloatType> ( realInterval ) );
+			new NearestNeighborSearchOnKDTree<>(
+				new KDTree<>( realInterval ) );
 
 		// make it into RealRandomAccessible using nearest neighbor search
 		RealRandomAccessible< FloatType > realRandomAccessible =
@@ -90,8 +90,7 @@ public class Example8a
 		ImageJFunctions.show( view );
 
 		// compute a gauss on it
-		Img< FloatType > convolved =
-			new ArrayImgFactory< FloatType >().create( interval, new FloatType() );
+		Img< FloatType > convolved = new ArrayImgFactory<>( new FloatType() ).create( interval );
 
 		Gauss.inFloat( new double[] { 3, 3 }, view, interval, convolved,
 			new Point( view.numDimensions() ), convolved.factory() );
@@ -120,7 +119,7 @@ public class Example8a
 
 		// a list of Samples with coordinates
 		RealPointSampleList< FloatType > elements =
-			new RealPointSampleList<FloatType>( numDimensions );
+			new RealPointSampleList<>( numDimensions );
 
 		for ( int i = 0; i < numPoints; ++i )
 		{

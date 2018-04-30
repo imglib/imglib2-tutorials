@@ -33,8 +33,9 @@ package interactive;
  * #L%
  */
 
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imagej.ImgPlus;
 import net.imglib2.converter.Converter;
 import net.imglib2.img.array.ArrayImgFactory;
@@ -52,7 +53,7 @@ public class InteractiveCompositeViewer
 	final static public void main( final String[] args ) throws ImgIOException
 	{
 		final String filename = "bike2-composite.tif";
-		final ImgPlus< FloatType > img = new ImgOpener().openImg( filename, new ArrayImgFactory< FloatType >(), new FloatType() );
+		final ImgPlus< FloatType > img = IO.openImgs( filename, new ArrayImgFactory<>( new FloatType() ) ).get( 0 );
 
 		final CompositeView< FloatType, NumericComposite< FloatType > > compositeView =
 				Views.collapseNumeric( Views.extendZero( img ), ( int )img.dimension( 2 ) );
@@ -81,7 +82,7 @@ public class InteractiveCompositeViewer
 
 		System.out.println( compositeView.numDimensions() );
 
-		final InteractiveViewer2D< NumericComposite< FloatType > > viewer = new InteractiveViewer2D< NumericComposite< FloatType > >( w, h, compositeView, initial, converter );
+		final InteractiveViewer2D< NumericComposite< FloatType > > viewer = new InteractiveViewer2D<>( w, h, compositeView, initial, converter );
 		viewer.getDisplayCanvas().addOverlayRenderer( new LogoPainter() );
 		viewer.requestRepaint();
 	}

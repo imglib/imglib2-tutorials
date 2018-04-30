@@ -32,8 +32,10 @@
  * #L%
  */
 import ij.ImageJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.FinalInterval;
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
@@ -56,9 +58,9 @@ public class Example6a3
 {
 	public Example6a3() throws ImgIOException, IncompatibleTypeException
 	{
-		// open with ImgOpener as a FloatType
-		Img< FloatType > image = new ImgOpener().openImg( "DrosophilaWing.tif",
-			new FloatType() );
+		// open with SCIFIO as a FloatType
+		Img< FloatType > image = IO.openImgs( "DrosophilaWing.tif",
+			new FloatType() ).get( 0 );
 
 		// perform gaussian convolution with float precision
 		double sigma = 8;

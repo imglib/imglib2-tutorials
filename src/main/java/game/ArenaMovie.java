@@ -115,10 +115,10 @@ public class ArenaMovie
 		ImageStack stack = new ImageStack( width, height );
 		
 		// create a new ArrayImgFactory for LifeForm
-		final ArrayImgFactory< LifeForm > factory = new ArrayImgFactory< LifeForm >();
+		final ArrayImgFactory< LifeForm > factory = new ArrayImgFactory<>( new LifeForm() );
 		
 		// create the ArrayImg containing the simulation
-		Img<LifeForm> arena = factory.create( new long[] { width, height }, new LifeForm() );
+		Img< LifeForm > arena = factory.create( width, height );
 
 		// seed the arena with a number of random life forms
 		seedArena( arena, numSeeds, numRaces );
