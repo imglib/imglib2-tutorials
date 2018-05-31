@@ -32,8 +32,10 @@
  * #L%
  */
 import ij.ImageJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.algorithm.gauss3.Gauss3;
 import net.imglib2.exception.IncompatibleTypeException;
@@ -53,8 +55,8 @@ public class Example6a4
 	public Example6a4() throws ImgIOException, IncompatibleTypeException
 	{
 		// open with ImgOpener as a FloatType
-		Img< FloatType > image = new ImgOpener().openImg( "DrosophilaWing.tif",
-			new FloatType() );
+		Img< FloatType > image = IO.openImgs( "DrosophilaWing.tif",
+			new FloatType() ).get( 0 );
 
 		// perform all (n-1)-dimensional gaussian (in this case it means 1d) on
 		// some of the row/columns

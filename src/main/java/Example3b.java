@@ -31,8 +31,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  * #L%
  */
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.img.Img;
 import net.imglib2.type.NativeType;
 import net.imglib2.type.numeric.RealType;
@@ -50,7 +51,7 @@ public class Example3b
 		ImgIOException
 	{
 		// open with ImgOpener
-		final Img< T > img = (Img< T >) new ImgOpener().openImg( "DrosophilaWing.tif" );
+		final Img< T > img = (Img< T >) IO.openImgs( "DrosophilaWing.tif" ).get( 0 );
 
 		// compute average of the image
 		final double avg = computeAverage( img );

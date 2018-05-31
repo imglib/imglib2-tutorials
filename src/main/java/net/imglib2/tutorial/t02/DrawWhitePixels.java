@@ -52,7 +52,7 @@ public class DrawWhitePixels
 	public static void main( final String[] args )
 	{
 		final int[] dimensions = new int[] { 400, 320 };
-		final Img< UnsignedByteType > img = new ArrayImgFactory< UnsignedByteType >().create( dimensions, new UnsignedByteType() );
+		final Img< UnsignedByteType > img = new ArrayImgFactory<>( new UnsignedByteType() ).create( dimensions );
 
 		final RandomAccess< UnsignedByteType > r = img.randomAccess();
 		final Random random = new Random();

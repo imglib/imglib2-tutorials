@@ -34,8 +34,9 @@
 
 package net.imglib2.tutorial.t02;
 
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.Cursor;
 import net.imglib2.IterableInterval;
 import net.imglib2.img.Img;
@@ -80,12 +81,12 @@ public class FindMaximumValueAndLocationGenericBenchmark
 				cursor.localize( pos );
 			}
 		}
-		return new MaxAndPos<T>( max, pos );
+		return new MaxAndPos<>( max, pos );
 	}
 
 	public static void main( final String[] args ) throws ImgIOException
 	{
-		final Img< UnsignedByteType > img = new ImgOpener().openImg( "graffiti.tif", new ArrayImgFactory< UnsignedByteType >(), new UnsignedByteType() );
+		final Img< UnsignedByteType > img = IO.openImgs( "graffiti.tif", new ArrayImgFactory<>( new UnsignedByteType() ) ).get( 0 );
 		for ( int j = 0; j < 20; ++j )
 		{
 			{

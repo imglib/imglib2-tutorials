@@ -32,8 +32,10 @@
  * #L%
  */
 import ij.ImageJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.FinalInterval;
 import net.imglib2.RandomAccessible;
 import net.imglib2.img.Img;
@@ -51,9 +53,8 @@ public class Example5
 {
 	public Example5() throws ImgIOException
 	{
-		// open with ImgOpener as a FloatType
-		Img< FloatType > image = new ImgOpener().openImg( "DrosophilaWingSmall.tif",
-			new FloatType() );
+		// open with SCIFIO as a FloatType
+		Img< FloatType > image = IO.openImgs( "DrosophilaWingSmall.tif", new FloatType() ).get( 0 );
 
 		// create an infinite view where all values outside of the Interval are 0
 		RandomAccessible< FloatType> infinite1 =
@@ -81,9 +82,8 @@ public class Example5
 
 		// if you implemented your own strategy that you want to instantiate, it will look like this
 		RandomAccessible< FloatType> infinite7 =
-			new ExtendedRandomAccessibleInterval< FloatType, Img< FloatType > >( image,
-				new OutOfBoundsConstantValueFactory< FloatType, Img< FloatType > >(
-				new FloatType( 255 ) ) );
+			new ExtendedRandomAccessibleInterval<>( image,
+				new OutOfBoundsConstantValueFactory<>( new FloatType( 255 ) ) );
 
 		// visualize the outofbounds strategies
 

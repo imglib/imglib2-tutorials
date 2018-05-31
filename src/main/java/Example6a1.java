@@ -32,8 +32,10 @@
  * #L%
  */
 import ij.ImageJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.algorithm.gauss.Gauss;
 import net.imglib2.img.Img;
 import net.imglib2.img.display.imagej.ImageJFunctions;
@@ -49,9 +51,9 @@ public class Example6a1
 {
 	public Example6a1() throws ImgIOException
 	{
-		// open with ImgOpener as a FloatType
-		Img< FloatType > image = new ImgOpener().openImg( "DrosophilaWing.tif",
-			new FloatType() );
+		// open with SCIFIO as a FloatType
+		Img< FloatType > image = IO.openImgs( "DrosophilaWing.tif",
+			new FloatType() ).get( 0 );
 
 		// perform gaussian convolution with float precision
 		double[] sigma = new double[ image.numDimensions() ];

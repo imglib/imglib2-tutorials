@@ -51,8 +51,10 @@ package render.volume;
 
 import ij.IJ;
 import ij.ImageJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imagej.ImgPlus;
 import net.imglib2.Cursor;
 import net.imglib2.FinalRealInterval;
@@ -190,7 +192,7 @@ public class VolumeRenderer
 		
 		IJ.log( "Opening ZIP with ImgOpener ..." );
 		t = System.currentTimeMillis();
-		final ImgPlus< FloatType > img = new ImgOpener().openImg( filename + ".zip", new ArrayImgFactory< FloatType >(), new FloatType() );
+		final ImgPlus< FloatType > img = IO.openImgs( filename + ".zip", new ArrayImgFactory<>( new FloatType() ) ).get( 0 );
 		t = System.currentTimeMillis() - t;
 		IJ.log( "  took " +  t + "ms" );
 		
@@ -237,9 +239,9 @@ public class VolumeRenderer
 //		final RealRandomAccessible< FloatType > interpolant = Views.interpolate( extendedImg, new NearestNeighborInterpolatorFactory< FloatType >() );
 		final RandomAccessible< FloatType > rotated = RealViews.transform( interpolant, transformSequence );
 		
-		final AlphaIntensityLayers< FloatType > accumulator = new AlphaIntensityLayers< FloatType >( 1.0 / 4095.0, 0 );
-//		final AlphaIntensityLayers< FloatType > accumulator = new AlphaIntensityLayers< FloatType >( 1.0 / 5000.0, -500 );
-//		final AlphaIntensityLayers< FloatType > accumulator = new AlphaIntensityLayers< FloatType >( 1.0 / 0.2, -0.01 );
+		final AlphaIntensityLayers< FloatType > accumulator = new AlphaIntensityLayers<>( 1.0 / 4095.0, 0 );
+//		final AlphaIntensityLayers< FloatType > accumulator = new AlphaIntensityLayers<>( 1.0 / 5000.0, -500 );
+//		final AlphaIntensityLayers< FloatType > accumulator = new AlphaIntensityLayers<>( 1.0 / 0.2, -0.01 );
 		
 		for ( int i = 0; i < numFrames; ++i )
 		{
@@ -283,14 +285,13 @@ public class VolumeRenderer
 		
 		//final String filename = "/home/saalfeld/examples/l1-cns-05-05-5-DPX-9.tif";
 		final String filename = "/home/saalfeld/examples/l1-cns-05-05-5-DPX-9-10.tif";
-		final ImgPlus< UnsignedShortType > xycz = new ImgOpener().openImg( filename, new ArrayImgFactory< UnsignedShortType >(), new UnsignedShortType() );
+		final ImgPlus< UnsignedShortType > xycz = IO.openImgs( filename, new ArrayImgFactory<>( new UnsignedShortType() ) ).get( 0 );
 		final RandomAccessibleInterval< UnsignedShortType > xyzc = Views.permute( xycz, 2, 3 );
 		final CompositeIntervalView< UnsignedShortType, RealComposite< UnsignedShortType > > img =
 				Views.collapseReal( xyzc );
 		
 		/* composing converter */
-		final RealCompositeARGBDoubleConverter< UnsignedShortType > composite2ARGBDouble =
-				new RealCompositeARGBDoubleConverter< UnsignedShortType >( ( int )xyzc.dimension( 3 ) );
+		final RealCompositeARGBDoubleConverter< UnsignedShortType > composite2ARGBDouble = new RealCompositeARGBDoubleConverter<>( ( int ) xyzc.dimension( 3 ) );
 		
 		composite2ARGBDouble.setARGB( new ARGBDoubleType( 1, s, 0, 0 ), 0 );
 		composite2ARGBDouble.setARGB( new ARGBDoubleType( 0.35, s, s, s ), 1 );
@@ -353,8 +354,8 @@ public class VolumeRenderer
 //		final RealRandomAccessible< NativeARGBDoubleType > interpolant = Views.interpolate( Views.extendZero( argbCopy ), new NearestNeighborInterpolatorFactory< NativeARGBDoubleType >() );
 //		final RandomAccessible< NativeARGBDoubleType > rotated = RealViews.transform( interpolant, transformSequence );
 		
-//		final ARGBDoubleLayers< NativeARGBDoubleType > accumulator = new ARGBDoubleLayers();
-		final ARGBDoubleLayers< ARGBDoubleType > accumulator = new ARGBDoubleLayers< ARGBDoubleType >();
+//		final ARGBDoubleLayers< NativeARGBDoubleType > accumulator = new ARGBDoubleLayers<>();
+		final ARGBDoubleLayers< ARGBDoubleType > accumulator = new ARGBDoubleLayers<>();
 		
 		for ( int i = 44; i < numFrames; ++i )
 		{
@@ -398,15 +399,13 @@ public class VolumeRenderer
 		
 		final String filename = "/home/saalfeld/examples/l1-cns-05-05-5-DPX-9.tif";
 		//final String filename = "/home/saalfeld/examples/l1-cns-05-05-5-DPX-9-10.tif";
-		final ImgPlus< UnsignedShortType > xycz = new ImgOpener().openImg( filename, new ArrayImgFactory< UnsignedShortType >(), new UnsignedShortType() );
+		final ImgPlus< UnsignedShortType > xycz = IO.openImgs( filename, new ArrayImgFactory<>( new UnsignedShortType() ) ).get( 0 );
 		final RandomAccessibleInterval< UnsignedShortType > xyzc = Views.permute( xycz, 2, 3 );
 		final CompositeIntervalView< UnsignedShortType, RealComposite< UnsignedShortType > > img =
 				Views.collapseReal( xyzc );
 		
 		/* composing converter */
-		final RealCompositeARGBDoubleConverter< UnsignedShortType > composite2ARGBDouble =
-				new RealCompositeARGBDoubleConverter< UnsignedShortType >( ( int )xyzc.dimension( 3 ) );
-		
+		final RealCompositeARGBDoubleConverter< UnsignedShortType > composite2ARGBDouble = new RealCompositeARGBDoubleConverter<>( ( int ) xyzc.dimension( 3 ) );		
 		
 		composite2ARGBDouble.setARGB( new ARGBDoubleType( a, s, 0, 0 ), 0 );
 		composite2ARGBDouble.setARGB( new ARGBDoubleType( 0.35 * a, s, s, s ), 1 );
@@ -419,9 +418,9 @@ public class VolumeRenderer
 		/* copy it as on-the-fly conversion isn't the quickest thing in the world */
 		final Img< NativeARGBDoubleType > argbCopy;
 		if ( xyzc.dimension( 0 ) * xyzc.dimension( 1 ) * xyzc.dimension( 2 ) * 4 > Integer.MAX_VALUE )
-			argbCopy = new CellImgFactory< NativeARGBDoubleType >( 256 ).create( img, new NativeARGBDoubleType() );
+			argbCopy = new CellImgFactory<>( new NativeARGBDoubleType(), 256 ).create( img );
 		else
-			argbCopy = new ArrayImgFactory< NativeARGBDoubleType >().create( img, new NativeARGBDoubleType() );
+			argbCopy = new ArrayImgFactory<>( new NativeARGBDoubleType() ).create( img );
 		
 		final IterableInterval< ARGBDoubleType > sourceIterable = Views.flatIterable( argbComposite );
 		final IterableInterval< NativeARGBDoubleType > targetIterable = Views.flatIterable( argbCopy );
@@ -480,7 +479,7 @@ public class VolumeRenderer
 //		final RealRandomAccessible< NativeARGBDoubleType > interpolant = Views.interpolate( Views.extendZero( argbCopy ), new NearestNeighborInterpolatorFactory< NativeARGBDoubleType >() );
 		final RandomAccessible< NativeARGBDoubleType > rotated = RealViews.transform( interpolant, transformSequence );
 		
-		final ARGBDoubleLayers< NativeARGBDoubleType > accumulator = new ARGBDoubleLayers< NativeARGBDoubleType >();
+		final ARGBDoubleLayers< NativeARGBDoubleType > accumulator = new ARGBDoubleLayers<>();
 		
 		for ( int i = 0; i < numFrames; ++i )
 		{

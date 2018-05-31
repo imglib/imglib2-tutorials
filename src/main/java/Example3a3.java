@@ -31,8 +31,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  * #L%
  */
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.Cursor;
 import net.imglib2.IterableInterval;
 import net.imglib2.Point;
@@ -52,8 +53,8 @@ public class Example3a3
 	public < T extends RealType< T > & NativeType< T > > Example3a3()
 		throws ImgIOException
 	{
-		// open with ImgOpener (he will decide which Img is best)
-		Img< T > img = (Img< T >) new ImgOpener().openImg( "DrosophilaWing.tif" );
+		// open with SCIFIO (it will decide which Img is best)
+		Img< T > img = ( Img< T > ) IO.openImgs( "DrosophilaWing.tif" ).get( 0 );
 
 		// create two location objects
 		Point locationMin = new Point( img.numDimensions() );

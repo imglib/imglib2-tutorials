@@ -51,7 +51,7 @@ public class DrawMandelbrot
 	public static void main( final String[] args )
 	{
 		final int[] dimensions = new int[] { 600, 400 };
-		final Img< UnsignedByteType > img = new ArrayImgFactory< UnsignedByteType >().create( dimensions, new UnsignedByteType() );
+		final Img< UnsignedByteType > img = new ArrayImgFactory<>( new UnsignedByteType() ).create( dimensions );
 
 		final RealRandomAccess< UnsignedByteType > mb = new MandelbrotRealRandomAccess();
 

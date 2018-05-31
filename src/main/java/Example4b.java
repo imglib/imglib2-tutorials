@@ -32,8 +32,10 @@
  * #L%
  */
 import ij.ImageJ;
+
+import io.scif.img.IO;
 import io.scif.img.ImgIOException;
-import io.scif.img.ImgOpener;
+
 import net.imglib2.Cursor;
 import net.imglib2.Interval;
 import net.imglib2.RandomAccessibleInterval;
@@ -61,15 +63,15 @@ public class Example4b
 	public < T extends RealType< T > & NativeType< T > > Example4b()
 		throws ImgIOException
 	{
-		// open with ImgOpener
-		Img< T > img = (Img< T >) new ImgOpener().openImg( "DrosophilaWing.tif" );
+		// open with SCIFIO
+		Img< T > img = ( Img< T > ) IO.openImgs( "DrosophilaWing.tif" ).get( 0 );
 
 		// first we do a small in-place gaussian smoothing with a sigma of 1
 		Gauss.inDoubleInPlace( new double[]{ 1, 1 }, img );
 
 		// find local minima and paint them into another image as spheres
 		Img< BitType > display =
-			findAndDisplayLocalMinima( img, new ArrayImgFactory< BitType >(), new BitType() );
+				findAndDisplayLocalMinima( img, new ArrayImgFactory<>( new BitType() ) );
 
 		// display output and input
 		ImageJFunctions.show( img );
@@ -82,16 +84,15 @@ public class Example4b
 	 *
 	 * @param source - the image data to work on
 	 * @param imageFactory - the factory for the output img
-	 * @param outputType - the output type
 	 * @return - an Img with circles on locations of a local minimum
 	 */
 	public static < T extends Comparable< T >, U extends RealType< U > > Img< U >
 		findAndDisplayLocalMinima(
 			RandomAccessibleInterval< T > source,
-			ImgFactory< U > imageFactory, U outputType )
+			ImgFactory< U > imageFactory )
 	{
 		// Create a new image for the output
-		Img< U > output = imageFactory.create( source, outputType );
+		Img< U > output = imageFactory.create( source );
 
 		// define an interval that is one pixel smaller on each side in each dimension,
 		// so that the search in the 8-neighborhood (3x3x3...x3) never goes outside
@@ -135,7 +136,7 @@ public class Example4b
 			if ( isMinimum )
 			{
 				// draw a sphere of radius one in the new image
-				HyperSphere< U > hyperSphere = new HyperSphere< U >( output, center, 1 );
+				HyperSphere< U > hyperSphere = new HyperSphere<>( output, center, 1 );
 
 				// set every value inside the sphere to 1
 				for ( U value : hyperSphere )
