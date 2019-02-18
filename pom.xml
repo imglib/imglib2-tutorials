@@ -15,7 +15,7 @@
 
 	<name>ImgLib2 Tutorials</name>
 	<description>This project shows ten increasingly complex examples of how to program with ImgLib2. The intention of these examples are not to explain ImgLib2 concepts, but rather to give some practical hints how to work with the library and to grasp the principles in a learning-by-doing way. Also included is the Game of Death (similar to Conway's Game of Life): a cellular automaton, simulating competing life forms, which illustrates the generality of the ImgLib2 typing mechanism.</description>
-	<url>http://imagej.net/ImgLib2_Examples</url>
+	<url>https://imagej.net/ImgLib2_Examples</url>
 	<inceptionYear>2009</inceptionYear>
 	<organization>
 		<name>ImgLib2</name>
@@ -32,7 +32,7 @@
 		<developer>
 			<id>tpietzsch</id>
 			<name>Tobias Pietzsch</name>
-			<url>http://imagej.net/User:Pietzsch</url>
+			<url>https://imagej.net/User:Pietzsch</url>
 			<roles>
 				<role>lead</role>
 				<role>developer</role>
@@ -45,7 +45,7 @@
 		<developer>
 			<id>StephanPreibisch</id>
 			<name>Stephan Preibisch</name>
-			<url>http://imagej.net/User:StephanP</url>
+			<url>https://imagej.net/User:StephanP</url>
 			<roles>
 				<role>founder</role>
 				<role>lead</role>
@@ -59,7 +59,7 @@
 		<developer>
 			<id>axtimwalde</id>
 			<name>Stephan Saalfeld</name>
-			<url>http://imagej.net/User:Saalfeld</url>
+			<url>https://imagej.net/User:Saalfeld</url>
 			<roles>
 				<role>founder</role>
 				<role>lead</role>
@@ -73,7 +73,7 @@
 		<developer>
 			<id>ctrueden</id>
 			<name>Curtis Rueden</name>
-			<url>http://imagej.net/User:Rueden</url>
+			<url>https://imagej.net/User:Rueden</url>
 			<roles>
 				<role>maintainer</role>
 			</roles>
