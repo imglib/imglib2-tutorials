@@ -66,7 +66,7 @@ public class Example6a3
 		double sigma = 8;
 
 		// we need to extend it nevertheless as the algorithm needs more pixels from around
-		// the convolved area and we are not sure how much exactly (altough we could compute
+		// the convolved area and we are not sure how much exactly (although we could compute
 		// it with some effort from the sigma).
 		// Here we let the Views framework take care of the details. The Gauss convolution
 		// knows which area of the source image is required, and if the extension is not needed,
