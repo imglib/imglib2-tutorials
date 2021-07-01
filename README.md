@@ -1,2 +1,2 @@
-[![](https://travis-ci.org/imglib/imglib2-tutorials.svg?branch=master)](https://travis-ci.org/imglib/imglib2-tutorials)
+[![](https://github.com/imglib/imglib2-tutorials/actions/workflows/build-main.yml/badge.svg)](https://github.com/imglib/imglib2-tutorials/actions/workflows/build-main.yml)
 
