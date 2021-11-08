@@ -94,7 +94,7 @@
 
 
 	<scm>
-		<connection>scm:git:git://github.com/imglib/imglib2-tutorials</connection>
+		<connection>scm:git:https://github.com/imglib/imglib2-tutorials</connection>
 		<developerConnection>scm:git:git@github.com:imglib/imglib2-tutorials</developerConnection>
 		<tag>HEAD</tag>
 		<url>https://github.com/imglib/imglib2-tutorials</url>
